@@ -21,7 +21,8 @@
 
 **CONDITIONAL** = "if", BOOL_EXPRESSION, "{", { STATEMENT }, "}", [ "ELSE", "{", { STATEMENT }, "}" ] ;  
 **WHILE_LOOP** = "while" , BOOL_EXPRESSION, "{", { STATEMENT }, "}" ;  
-**FOR_LOOP** = "for", [ IDENTIFIER, "<-", ] EXPRESSION, "from", EXPRESSION, "to", EXPRESSION, [ "step", EXPRESSION ], "{", { STATEMENT }, "}" ;  
+**FOR_LOOP** = "for", IDENTIFIER, "<-", RANGE, "do", "{", { STATEMENT }, "}" ;  
+**RANGE** = EXPRESSION, "..", EXPRESSION;
 
 **FUNCTION_CALL** = "func", IDENTIFIER, "(", [ ARG_LIST ], ")", "->", { STATEMENT } ;  
 **ARG_LIST** = EXPRESSION, { ",", EXPRESSION } ; 
