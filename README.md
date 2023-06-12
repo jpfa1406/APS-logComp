@@ -15,7 +15,7 @@
 **IDENTIFIER** = LETTER, { LETTER | DIGIT | "_" } ;  
 **ASSIGNMENT** = IDENTIFIER, "<-", (CREATE | ASSING) ;  
 
-**CREATE** = "(", TYPE, ")" ;
+**CREATE** = "(", TYPE, ")" ;  
 **TYPE** = "Int" | "String" ;
 
 **ASSING** = "=",  RELEXPRE ;
