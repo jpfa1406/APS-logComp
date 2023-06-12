@@ -18,7 +18,7 @@
 **CREATE** = "(", TYPE, ")" ;  
 **TYPE** = "Int" | "String" ;
 
-**ASSING** = "=",  RELEXPRE ;
+**ASSIGN** = "=",  RELEXPRE ;
 
 -------
 
