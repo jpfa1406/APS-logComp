@@ -5,7 +5,7 @@
 
 ------
 
-**RELEXPRE** = EXPRESSION, { ("==" | ">" | "<"), EXPRESSION } ;
+**RELEXPRE** = EXPRESSION, { ("==" | ">" | "<"), EXPRESSION } ;  
 **EXPRESSION** = TERM, { ("+" | "-" | "||" | "."), TERM } ;  
 **TERM** = FACTOR, { ("*" | "/" | "&&"), FACTOR } ;  
 **FACTOR** = (("+" | "-" | "!"), FACTOR) | NUMBER | STRING | "(", RELEXPR, ")" | IDENTIFIER, ["(", RELEXPR, {",", RELEXPR} ,")"] | ("readin", "(", ")") ;
