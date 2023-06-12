@@ -31,9 +31,9 @@
 -> **RANGE** = EXPRESSION, "..", EXPRESSION;
 
 **FUNCTION** = "func", IDENTIFIER, "(", [ ARG_LIST ], ")", "->", "{", { STATEMENT }, "}", "(", TYPE, ")" ;  
-**ARG_LIST** = IDENTIFIER, "(", TYPE, ")", { ",", IDENTIFIER, "(", TYPE, ")" } ;
-**RETURN** = "return", RELEXPRE ;
-**CALL_FUNC** = IDENTIFIER, "(", [RELEXPRE,{ ",", RELEXPRE}], ")" ;
+**ARG_LIST** = IDENTIFIER, "(", TYPE, ")", { ",", IDENTIFIER, "(", TYPE, ")" } ;  
+**RETURN** = "return", RELEXPRE ;  
+**CALL_FUNC** = IDENTIFIER, "(", [RELEXPRE,{ ",", RELEXPRE}], ")" ;  
 
 ------
 
