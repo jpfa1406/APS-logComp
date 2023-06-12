@@ -1,6 +1,6 @@
 # EBNF
 
-**BLOCK** = { STATEMENT } ";" ;  
+**BLOCK** = { STATEMENT } ;  
 **STATEMENT** = ( λ | ASSIGNMENT | PRINT | WHILE_LOOP | IF | FUNCTION | RETURN | CALL_FUNC ), ";" ;
 
 ------
