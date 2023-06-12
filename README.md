@@ -5,7 +5,7 @@
 
 ------
 
-**RELEXPRE** = EXPRESSION, { ("==" | ">" | "<"), EXPRESSION }
+**RELEXPRE** = EXPRESSION, { ("==" | ">" | "<"), EXPRESSION } ;
 **EXPRESSION** = TERM, { ("+" | "-" | "||" | "."), TERM } ;  
 **TERM** = FACTOR, { ("*" | "/" | "&&"), FACTOR } ;  
 **FACTOR** = (("+" | "-" | "!"), FACTOR) | NUMBER | STRING | "(", RELEXPR, ")" | IDENTIFIER, ["(", RELEXPR, {",", RELEXPR} ,")"] | ("readin", "(", ")") ;
@@ -33,10 +33,11 @@
 **FUNCTION** = "func", IDENTIFIER, "(", [ ARG_LIST ], ")", "->", "{", { STATEMENT }, "}", "(", TYPE, ")" ;  
 **ARG_LIST** = IDENTIFIER, "(", TYPE, ")", { ",", IDENTIFIER, "(", TYPE, ")" } ;
 **RETURN** = "return", RELEXPRE ;
-**CALL_FUNC** = IDENTIFIER, "(", [RELEXPRE, { ",", RELEXPRE}], ")" ;
+**CALL_FUNC** = IDENTIFIER, "(", [RELEXPRE,{ ",", RELEXPRE}], ")" ;
 
 ------
 
-**NUMBER** = DIGIT, { DIGIT } ;
-**LETTER** = ( a | ... | z | A | ... | Z ) ;
-**DIGIT** = ( 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 ) ;
+**NUMBER** = DIGIT, { DIGIT } ;  
+**LETTER** = ( a | ... | z | A | ... | Z ) ;  
+**DIGIT** = ( 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 ) ;  
+
