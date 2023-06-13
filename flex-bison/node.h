@@ -30,13 +30,6 @@ public:
 	virtual llvm::Value* codeGen(CodeGenContext& context);
 };
 
-class NDouble : public NExpression {
-public:
-	double value;
-	NDouble(double value) : value(value) { }
-	virtual llvm::Value* codeGen(CodeGenContext& context);
-};
-
 class NIdentifier : public NExpression {
 public:
 	std::string name;
@@ -128,5 +121,68 @@ public:
 	NFunctionDeclaration(const NIdentifier& type, const NIdentifier& id, 
 			const VariableList& arguments, NBlock& block) :
 		type(type), id(id), arguments(arguments), block(block) { }
+	virtual llvm::Value* codeGen(CodeGenContext& context);
+};
+
+//////////////////////////////////////////////////
+
+//create if statement
+class NIfStatement : public NStatement {
+public:
+	NExpression& condition;
+	NBlock& thenBlock;
+	NIfStatement(NExpression& condition, NBlock& block) :
+		condition(condition), thenBlock(block) { }
+	virtual llvm::Value* codeGen(CodeGenContext& context);
+};
+
+//create Loop statement
+class NLoopStatement : public NStatement {
+public:
+	NExpression& condition;
+	NBlock& block;
+	NLoopStatement(NExpression& condition, NBlock& block) : 
+		condition(condition), block(block) { }
+	virtual llvm::Value* codeGen(CodeGenContext& context);
+};
+
+//create Loop statement
+// class NLoopStatement : public NStatement {
+// public:
+// 	NExpression& condition;
+// 	NBlock& block;
+// 	NLoopStatement(NExpression& condition, NBlock& block) : 
+// 		condition(condition), block(block) { }
+// 	virtual llvm::Value* codeGen(CodeGenContext& context);
+// };
+
+
+/////////////////////////////////////////////////// DSL /////////////////////////////////////////////////
+
+class NDSLMovementStatement : public NStatement {
+public:
+	int op;
+	NIdentifier& person;
+	NExpression& exp;
+	NDSLMovementStatement(int op, NIdentifier& person, NExpression& exp) :
+		op(op), person(person), exp(exp) { }
+	virtual llvm::Value* codeGen(CodeGenContext& context);
+};
+
+class NDSLCreationStatement : public NStatement {
+public:
+	NIdentifier& person;
+	NExpression& exp;
+	NDSLCreationStatement(NIdentifier& person, NExpression& exp) : 
+	person(person), exp(exp) { }
+	virtual llvm::Value* codeGen(CodeGenContext& context);
+};
+class NDSLTransferStatement : public NStatement {
+public:
+	NIdentifier& expender;
+	NIdentifier& receiver;
+	NExpression& exp;
+	NDSLTransferStatement(NIdentifier& expender, NIdentifier& receiver, NExpression& exp) : 
+	expender(expender), receiver(receiver), exp(exp) { }
 	virtual llvm::Value* codeGen(CodeGenContext& context);
 };

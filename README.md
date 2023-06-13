@@ -1,47 +1,44 @@
 # EBNF
 
-**PROGRAM** = { STATEMENT } ";" ;  
-**STATEMENT** = ASSIGNMENT | CONDITIONAL | LOOP | PRINT | FUNCTION_CALL ;  
+**BLOCK** = { STATEMENT } ;  
+**STATEMENT** = ( λ | ASSIGNMENT | PRINT | WHILE_LOOP | IF | FUNCTION | RETURN | CALL_FUNC ), ";" ;
 
 ------
 
-**EXPRESSION** = TERM, { ("+" | "-"), TERM } ;  
-**TERM** = FACTOR, { ("*" | "/"), FACTOR } ;  
-**FACTOR** = (("+" | "-"), FACTOR) | NUMBER | "(", EXPRESSION, ")" | IDENTIFIER ;  
-**BOOL_EXPRESSION** = BOOL_TERM, { ("||" | "&&"), BOOL_TERM } ;  
-**BOOL_TERM** = BOOL_FACTOR, { ("==" | "!=" | "<=" | ">=" | "<" | ">"), BOOL_FACTOR } ;  
-**BOOL_FACTOR** = "true" | "false" | "(", BOOL_EXPRESSION, ")" | EXPRESSION;  
+**RELEXPRE** = EXPRESSION, { ("==" | ">" | "<"), EXPRESSION } ;  
+**EXPRESSION** = TERM, { ("+" | "-" | "||" | "."), TERM } ;  
+**TERM** = FACTOR, { ("*" | "/" | "&&"), FACTOR } ;  
+**FACTOR** = (("+" | "-" | "!"), FACTOR) | NUMBER | STRING | "(", RELEXPR, ")" | IDENTIFIER, ["(", RELEXPR, {",", RELEXPR} ,")"] | ("readin", "(", ")") ;
 
 -------
 
 **IDENTIFIER** = LETTER, { LETTER | DIGIT | "_" } ;  
-**ASSIGNMENT** = IDENTIFIER, "<-", EXPRESSION | STRING ;  
+**ASSIGNMENT** = IDENTIFIER, "<-", (CREATE | ASSING) ;  
 
-**PRINT** = "print", (EXPRESSION | STRING | IDENTIFIER);  
+**CREATE** = "(", TYPE, ")" ;  
+**TYPE** = "Int" | "String" ;
 
-**CONDITIONAL** = "if", BOOL_EXPRESSION, "{", { STATEMENT }, "}", [ "ELSE", "{", { STATEMENT }, "}" ] ;  
-**WHILE_LOOP** = "while" , BOOL_EXPRESSION, "{", { STATEMENT }, "}" ;  
-**FOR_LOOP** = "for", IDENTIFIER, "<-", RANGE, "do", "{", { STATEMENT }, "}" ;  
-**RANGE** = EXPRESSION, "..", EXPRESSION;
+**ASSIGN** = "=",  RELEXPRE ;
 
-**FUNCTION_CALL** = "func", IDENTIFIER, "(", [ ARG_LIST ], ")", "->", { STATEMENT } ;  
-**ARG_LIST** = EXPRESSION, { ",", EXPRESSION } ; 
+-------
+
+**PRINT** = "print", "(", RELEXPRE, ")" ;  
+
+**WHILE_LOOP** = "while" , RELEXPRE, "{", { STATEMENT }, "}" ;  
+**IF** = "if", RELEXPRE, "{", { STATEMENT }, "}", [ "else", "{", { STATEMENT }, "}" ] ;  
+
+-> **FOR_LOOP** = "for", IDENTIFIER, "<-", RANGE, "do", "{", { STATEMENT }, "}" ;  
+-> **RANGE** = EXPRESSION, "..", EXPRESSION;
+
+**FUNCTION** = "func", IDENTIFIER, "(", [ ARG_LIST ], ")", "->", "{", { STATEMENT }, "}", "(", TYPE, ")" ;  
+**ARG_LIST** = IDENTIFIER, "(", TYPE, ")", { ",", IDENTIFIER, "(", TYPE, ")" } ;  
+**RETURN** = "return", RELEXPRE ;  
+**CALL_FUNC** = IDENTIFIER, "(", [RELEXPRE,{ ",", RELEXPRE}], ")" ;  
 
 ------
 
-**STRING** = SINGLE_QUOTE_STRING | DOUBLE_QUOTE_STRING | TEXT_STRING | NUMBER_STRING ;  
+**NUMBER** = DIGIT, { DIGIT } ;  
+**STRING** = LETTER, { LETTER | DIGIT };  
+**LETTER** = ( a | ... | z | A | ... | Z ) ;  
+**DIGIT** = ( 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 ) ;  
 
-**SINGLE_QUOTE_STRING** = "' ", CHAR, { CHAR }, " '" ;  
-**DOUBLE_QUOTE_STRING** = " " ", CHAR, { CHAR }, " " " ;  
-**TEXT_STRING** = ("t" | "text"), " " ", LETTER, { LETTER }, " " " ;  
-**NUMBER_STRING** = ("n" | "number"), " " ", NUMBER, " " " ;  
-
-**LETTER** = (a | ... | z | A | ... | Z) ;  
-**SPECIAL** = (- |  | # | & | ’ | ( | ) | * | + | , | . | / | : | ; | < | = | >) ;  
-**CHAR** = LETTER | NUMBER | SPECIAL ;  
-  
-**NUMBER** = INTEGER | FLOAT ;  
-**INTEGER** = DIGIT | NONZERO, { DIGIT } ;  
-**FLOAT** = INTEGER, "." , INTEGER ;  
-**DIGIT** = ( 0 | NONZERO ) ;  
-**NONZERO** = ( 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 ) ;  
