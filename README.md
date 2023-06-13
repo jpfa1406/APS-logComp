@@ -25,7 +25,7 @@
 **PRINT** = "print", "(", RELEXPRE, ")" ;  
 
 **WHILE_LOOP** = "while" , RELEXPRE, "{", { STATEMENT }, "}" ;  
-**IF** = "if", RELEXPRE, "{", { STATEMENT }, "}", [ "else", "{", { STATEMENT }, "}" ] ;  
+**IF** = "if", RELEXPRE, "{", { STATEMENT }, "}", [";", "else", "{", { STATEMENT }, "}", ";" ] ;  
 
 -> **FOR_LOOP** = "for", IDENTIFIER, "<-", RANGE, "do", "{", { STATEMENT }, "}" ;  
 -> **RANGE** = EXPRESSION, "..", EXPRESSION;
