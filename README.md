@@ -1,11 +1,11 @@
 ## AnaJulia (.aj)
 
-#Descrição
+# Descrição
 ----------
 Linguagem baseada em Julia
 
 ----------
-#Exemplo
+# Exemplo
 ``` js
 x <- (Int);
 x <- readin();
