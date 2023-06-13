@@ -18,14 +18,14 @@
 **CREATE** = "(", TYPE, ")" ;  
 **TYPE** = "Int" | "String" ;
 
-**ASSIGN** = "=",  RELEXPRE ;
+**ASSIGN** = RELEXPRE ;
 
 -------
 
 **PRINT** = "print", "(", RELEXPRE, ")" ;  
 
 **WHILE_LOOP** = "while" , RELEXPRE, "{", { STATEMENT }, "}" ;  
-**IF** = "if", RELEXPRE, "{", { STATEMENT }, "}", [ "else", "{", { STATEMENT }, "}" ] ;  
+**IF** = "if", RELEXPRE, "{", { STATEMENT }, "}", [";", "else", "{", { STATEMENT }, "}", ";" ] ;  
 
 -> **FOR_LOOP** = "for", IDENTIFIER, "<-", RANGE, "do", "{", { STATEMENT }, "}" ;  
 -> **RANGE** = EXPRESSION, "..", EXPRESSION;
@@ -38,7 +38,7 @@
 ------
 
 **NUMBER** = DIGIT, { DIGIT } ;  
-**STRING** = LETTER, { LETTER | DIGIT };  
+**STRING** = """, LETTER, { LETTER | DIGIT }, """;  
 **LETTER** = ( a | ... | z | A | ... | Z ) ;  
 **DIGIT** = ( 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 ) ;  
 
