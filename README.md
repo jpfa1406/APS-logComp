@@ -1,4 +1,12 @@
+## AnaJulia (.aj)
+
+#Descrição
+----------
+Linguagem baseada em Julia
+
+-------
 # EBNF
+--------
 
 **BLOCK** = { STATEMENT } ;  
 **STATEMENT** = ( λ | ASSIGNMENT | PRINT | WHILE_LOOP | IF | FUNCTION | RETURN | CALL_FUNC ), ";" ;
